@@ -22,7 +22,7 @@ public class EmployeeController {
     private final EmployeeRepository repository;
     private final EmployeeModelAssembler assembler;
 
-    public EmployeeController(EmployeeRepository repository,
+    EmployeeController(EmployeeRepository repository,
                               EmployeeModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
@@ -93,7 +93,10 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employees/{id}")
-    void deleteEmployee(@PathVariable Long id){
+    ResponseEntity<?> deleteEmployee(@PathVariable Long id){
+
         repository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
